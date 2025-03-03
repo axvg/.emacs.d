@@ -259,19 +259,8 @@ If the new path's directories does not exist, create them."
   :hook (after-init . delete-selection-mode))
   
 
-(defun prot/keyboard-quit-dwim ()
-  "Do-What-I-Mean behaviour for a general `keyboard-quit'.
-
-The generic `keyboard-quit' does not do the expected thing when
-the minibuffer is open.  Whereas we want it to close the
-minibuffer, even without explicitly focusing it.
-
-The DWIM behaviour of this command is as follows:
-
-- When the region is active, disable it.
-- When a minibuffer is open, but not focused, close the minibuffer.
-- When the Completions buffer is selected, close it.
-- In every other case use the regular `keyboard-quit'."
+(defun me/keyboard-quit-dwim ()
+  "Do-What-I-Mean behaviour for a general `keyboard-quit'."
   (interactive)
   (cond
    ((region-active-p)
@@ -284,3 +273,11 @@ The DWIM behaviour of this command is as follows:
     (keyboard-quit))))
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
+
+(defun me/toggle-window-transparency () 
+	"Toggle frame's background transparency."
+	(interactive)
+	(let* ((desired-alpha 80))
+	(set-frame-parameter nil 'alpha-background
+		(if (not (frame-parameter nil 'alpha-background))
+			desired-alpha))))
