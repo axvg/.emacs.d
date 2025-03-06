@@ -8,3 +8,9 @@
 /projects
 
 .gitconfig
+custom.el
+
+recentf
+
+tree-sitter/
+lsp-servers/
