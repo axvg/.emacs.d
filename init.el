@@ -44,8 +44,8 @@
 ;; You can simply uncomment the following if you'd like to get started with
 ;; MELPA packages quickly:
 ;;
-;; (with-eval-after-load 'package
-;;   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
+(with-eval-after-load 'package
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 
 ;; If you want to turn off the welcome screen, uncomment this
 ;(setopt inhibit-splash-screen t)
@@ -210,9 +210,15 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package emacs
+;; (use-package emacs
+;;  :config
+;;  (load-theme 'modus-vivendi))          ; for light theme, use modus-operandi
+
+
+(use-package modus-themes
+  :ensure t
   :config
-  (load-theme 'modus-vivendi))          ; for light theme, use modus-operandi
+  (load-theme 'modus-vivendi-tinted :no-confirm-loading))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -266,3 +272,9 @@ If the new path's directories does not exist, create them."
  )
 
 (setq gc-cons-threshold (or bedrock--initial-gc-threshold 800000))
+
+
+
+;; me
+
+(load-file (expand-file-name "extras/me.el" user-emacs-directory))
