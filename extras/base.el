@@ -193,3 +193,36 @@
   :ensure t
   :config
   (setq wgrep-auto-save-buffer t))
+
+;; https://protesilaos.com/codelog/2024-11-28-basic-emacs-configuration/
+
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
+
+(use-package delsel
+  :ensure nil ; no need to install it as it is built-in
+  :hook (after-init . delete-selection-mode))
+
+
+(defun me/keyboard-quit-dwim ()
+  "Do-What-I-Mean behaviour for a general `keyboard-quit'."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((derived-mode-p 'completion-list-mode)
+    (delete-completion-window))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
+(define-key global-map (kbd "C-g") #'me/keyboard-quit-dwim)
+
+(defun me/toggle-window-transparency ()
+	"Toggle frame's background transparency."
+	(interactive)
+	(let* ((desired-alpha 80))
+	(set-frame-parameter nil 'alpha-background
+		(if (not (frame-parameter nil 'alpha-background))
+			desired-alpha))))
