@@ -7,3 +7,11 @@
 /projects
 /transient/
 /tree-sitter/
+
+.gitconfig
+custom.el
+
+recentf
+
+tree-sitter/
+lsp-servers/
